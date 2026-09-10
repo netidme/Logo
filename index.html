@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>免费Logo生成器 | 在线制作Logo图标 · 支持IconPark图标库</title>
+  <meta name="description" content="免费在线Logo生成器，一键制作专属Logo图标。内置2600+图标、8款免费商用字体、多种排版模板和配色方案，支持自定义背景、文字位置微调，可导出PNG高清图片。">
+  <meta name="keywords" content="Logo生成器,免费Logo制作,在线Logo设计,图标生成器,Logo图标,免费Logo,品牌Logo制作,IconPark图标">
+  <meta name="author" content="你的网站名">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="免费Logo生成器 | 在线制作Logo图标">
+  <meta property="og:description" content="免费在线制作Logo，内置2600+图标、8款免费字体、多种排版模板，支持高清PNG导出。">
+  <meta property="og:image" content="分享缩略图地址">
+  <meta property="og:url" content="你的网址">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="免费Logo生成器">
+  <meta name="twitter:description" content="免费在线制作Logo，2600+图标，8款字体。">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cn-fontsource-smiley-sans-oblique-regular/font.css">
+  <link rel="alternate" hreflang="zh-CN" href="/">
+  <link rel="alternate" hreflang="en" href="en/">
+  <link rel="alternate" hreflang="x-default" href="/">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@callmebill/lxgw-wenkai-web@latest/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/misans-webfont/misans-style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cn-fontsource-alimama-dong-fang-da-kai-regular@1.0.3/font.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cn-fontsource-source-han-sans-sc-vf/font.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@wc1font/source-han-serif-sc-vf/font.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cn-fontsource-yozai@1.0.6/font.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cn-fontsource-slideyouran-regular@1.0.3/font.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* 语言切换按钮 + 声明区域样式 */
+    .lang-switch-bar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 8px 16px;
+      background: #0f0f1a;
+      border-bottom: 1px solid #2a2a3a;
+    }
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #1e1e2e;
+      color: #e0e0e0;
+      padding: 8px 16px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid #3a3a4a;
+      transition: all 0.2s;
+    }
+    .lang-btn:hover {
+      background: #2a2a3e;
+      border-color: #e94560;
+      color: #fff;
+    }
+    .lang-btn .flag {
+      font-size: 18px;
+    }
+    /* 声明区块 */
+    .page-disclaimer {
+      max-width: 1200px;
+      margin: 16px auto 24px;
+      padding: 16px 20px;
+      background: #13131f;
+      border-left: 4px solid #e94560;
+      border-radius: 8px;
+      color: #b0b0c0;
+      font-size: 13px;
+      line-height: 1.7;
+      text-align: left;
+    }
+    .page-disclaimer strong {
+      color: #e94560;
+    }
+    .page-disclaimer a {
+      color: #6c9eff;
+      text-decoration: underline;
+    }
+    /* 原有样式微调，确保页脚链接和切换按钮不冲突 */
+    .app-header h1 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <!-- 语言切换栏 -->
+  <div class="lang-switch-bar">
+    <a href="/en/" class="lang-btn" title="Switch to English">
+      <span class="flag">🇬🇧</span> English
+    </a>
+  </div>
+
+  <header class="app-header">
+    <h1>🎨 免费Logo生成器</h1>
+    <p class="subtitle">IconPark 完整图标库 · 8款在线字体 · 排版模板 · RGB调色</p>
+</header>
+
+  <div class="app-body">
+    <div class="preview-panel">
+      <h3>🎴 实时预览</h3>
+      <div class="preview-container">
+        <div class="logo-preview-main" id="logoPreviewMain"></div>
+        <div class="logo-preview-sizes">
+          <canvas id="preview256" width="256" height="256"></canvas>
+          <canvas id="preview128" width="128" height="128"></canvas>
+          <canvas id="preview64" width="64" height="64"></canvas>
+          <canvas id="preview32" width="32" height="32"></canvas>
+        </div>
+        <div class="preview-info">主预览 · 256 · 128 · 64 · 32</div>
+      </div>
+      <div class="status-bar" id="statusBar">就绪 · 点击面板标题可折叠/展开</div>
+      <div class="template-block">
+        <h4>📐 排版模板</h4>
+        <div class="tpl-desc">点击任意排版，图标和文字自动布局到对应位置</div>
+        <div class="layout-grid" id="layoutGrid"></div>
+      </div>
+      <div class="template-block">
+        <h4>✨ 风格预设</h4>
+        <div class="tpl-desc">点击任意风格，一键换整套配色</div>
+        <div class="preset-grid" id="presetGrid"></div>
+      </div>
+      <div class="about-block">
+        <h4>💡 关于本工具</h4>
+        <ul class="about-list">
+          <li><strong>🎨 完全免费</strong>无需注册，打开即用，所有功能免费</li>
+          <li><strong>🖼 2600+ 图标</strong>内置字节跳动 IconPark 图标库，覆盖各行业场景</li>
+          <li><strong>🔤 8款免费字体</strong>得意黑、MiSans、思源黑体等在线字体，选择后自动加载</li>
+          <li><strong>🎯 智能排版</strong>8种常见Logo排版模板，一键套用</li>
+          <li><strong>🎨 灵活配色</strong>12种预设风格 + RGB自定义颜色</li>
+          <li><strong>📦 高清导出</strong>支持 PNG / 多尺寸批量导出 / 透明背景</li>
+          <li><strong>✨ 免费商用</strong>生成的Logo可用于商业项目，建议使用前自行查证对应字体与图标的具体授权条款</li>
+        </ul>
+        <div class="about-note">⚠️ 免责声明：本工具仅提供Logo制作功能。图标来自 IconPark 开源项目，字体来自各开源项目，其授权条款由原作者制定。使用前请自行查证是否符合你的使用场景。因使用本工具产生的任何版权纠纷，本网站不承担责任。</div>
+      </div>
+    </div>
+
+    <div class="control-panel">
+      <section class="panel-section" data-priority="5">
+        <h3>🎨 颜色设置 <span class="toggle open">▶</span></h3>
+        <div class="content open">
+          <label>配色方案（一键换色）</label>
+          <div class="color-schemes" id="colorSchemes"></div>
+
+          <div class="color-control" data-color-key="iconTextColor">
+            <div class="color-control-header"><label>🎯 图标颜色</label>
+              <div class="color-control-tabs"><button type="button" class="color-tab active" data-mode="hex">HEX</button> <button type="button" class="color-tab" data-mode="rgb">RGB</button></div>
+            </div>
+            <div class="color-input-row">
+              <input type="color" class="color-picker">
+              <div class="hex-input-wrapper"><input class="color-hex" maxlength="7"></div>
+              <div class="rgb-inputs"><input type="number" class="r" min="0" max="255" placeholder="R"> <input type="number" class="g" min="0" max="255" placeholder="G"> <input type="number" class="b" min="0" max="255" placeholder="B"></div>
+            </div>
+          </div>
+
+          <div class="color-control" data-color-key="iconBg">
+            <div class="color-control-header"><label>🔷 图标背景色</label>
+              <div class="color-control-tabs"><button type="button" class="color-tab active" data-mode="hex">HEX</button> <button type="button" class="color-tab" data-mode="rgb">RGB</button></div>
+            </div>
+            <div class="color-input-row">
+              <input type="color" class="color-picker">
+              <div class="hex-input-wrapper"><input class="color-hex" maxlength="7"></div>
+              <div class="rgb-inputs"><input type="number" class="r" min="0" max="255" placeholder="R"> <input type="number" class="g" min="0" max="255" placeholder="G"> <input type="number" class="b" min="0" max="255" placeholder="B"></div>
+            </div>
+          </div>
+
+          <div class="color-control" data-color-key="brandColor">
+            <div class="color-control-header"><label>📝 主标题颜色</label>
+              <div class="color-control-tabs"><button type="button" class="color-tab active" data-mode="hex">HEX</button> <button type="button" class="color-tab" data-mode="rgb">RGB</button></div>
+            </div>
+            <div class="color-input-row">
+              <input type="color" class="color-picker">
+              <div class="hex-input-wrapper"><input class="color-hex" maxlength="7"></div>
+              <div class="rgb-inputs"><input type="number" class="r" min="0" max="255" placeholder="R"> <input type="number" class="g" min="0" max="255" placeholder="G"> <input type="number" class="b" min="0" max="255" placeholder="B"></div>
+            </div>
+          </div>
+
+          <div class="color-control" data-color-key="sloganColor">
+            <div class="color-control-header"><label>📄 副标题颜色</label>
+              <div class="color-control-tabs"><button type="button" class="color-tab active" data-mode="hex">HEX</button> <button type="button" class="color-tab" data-mode="rgb">RGB</button></div>
+            </div>
+            <div class="color-input-row">
+              <input type="color" class="color-picker">
+              <div class="hex-input-wrapper"><input class="color-hex" maxlength="7"></div>
+              <div class="rgb-inputs"><input type="number" class="r" min="0" max="255" placeholder="R"> <input type="number" class="g" min="0" max="255" placeholder="G"> <input type="number" class="b" min="0" max="255" placeholder="B"></div>
+            </div>
+          </div>
+
+          <div class="color-control" data-color-key="customBgColor">
+            <div class="color-control-header"><label>🖼 自定义背景</label>
+              <div class="color-control-tabs"><button type="button" class="color-tab active" data-mode="hex">HEX</button> <button type="button" class="color-tab" data-mode="rgb">RGB</button></div>
+            </div>
+            <div class="color-input-row">
+              <input type="color" class="color-picker">
+              <div class="hex-input-wrapper"><input class="color-hex" maxlength="7"></div>
+              <div class="rgb-inputs"><input type="number" class="r" min="0" max="255" placeholder="R"> <input type="number" class="g" min="0" max="255" placeholder="G"> <input type="number" class="b" min="0" max="255" placeholder="B"></div>
+            </div>
+          </div>
+          <label>背景模式</label>
+          <select id="exportBg">
+            <option value="transparent">透明</option>
+            <option value="white">白色</option>
+            <option value="black">黑色</option>
+            <option value="custom">自定义</option>
+            <option value="#1a1a2e">深蓝</option>
+            <option value="#f5f5f5">浅灰</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="panel-section" data-priority="1">
+        <h3>🔧 图标样式 <span class="toggle open">▶</span></h3>
+        <div class="content open">
+          <label>图标大小</label>
+          <div class="range-row"><input type="range" id="iconSizeRatio" min="30" max="90" step="1" value="70"> <span class="val" id="iconSizeRatioVal">70%</span></div>
+          <label>圆角大小</label>
+          <div class="range-row"><input type="range" id="cornerRadius" min="0" max="100" step="1" value="30"> <span class="val" id="cornerRadiusVal">30</span></div>
+          <label>图标内大小</label>
+          <div class="range-row"><input type="range" id="iconFontRatio" min="30" max="90" step="1" value="55"> <span class="val" id="iconFontRatioVal">55%</span></div>
+          <label>阴影强度</label>
+          <div class="range-row"><input type="range" id="shadowStrength" min="0" max="30" step="1" value="5"> <span class="val" id="shadowStrengthVal">5</span></div>
+        </div>
+      </section>
+
+      <section class="panel-section" data-priority="2">
+        <h3>📝 文字内容 <span class="toggle open">▶</span></h3>
+        <div class="content open">
+          <label>主标题（品牌名）</label><input id="brandName" placeholder="ABC" value="ABC">
+          <label>副标题（可选）</label><input id="brandSlogan" placeholder="Design Studio" value="Design Studio">
+          <label>文字位置</label>
+          <select id="textPosition">
+            <option value="bottom">图标下方</option>
+            <option value="top">图标上方</option>
+            <option value="right">图标右侧</option>
+            <option value="left">图标左侧</option>
+            <option value="none">不显示文字</option>
+            <option value="inside">图标内部</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="panel-section" data-priority="3">
+        <h3>📐 布局间距 <span class="toggle open">▶</span></h3>
+        <div class="content open">
+          <label>画布内边距</label>
+          <div class="range-row"><input type="range" id="paddingRatio" min="0" max="20" step="1" value="8"> <span class="val" id="paddingRatioVal">8%</span></div>
+          <label>图标与文字间距</label>
+          <div class="range-row"><input type="range" id="iconTextGap" min="-50" max="80" step="1" value="2"> <span class="val" id="iconTextGapVal">2</span></div>
+          <label>文字垂直偏移</label>
+          <div class="range-row"><input type="range" id="textOffsetY" min="-100" max="100" step="1" value="0"> <span class="val" id="textOffsetYVal">0</span></div>
+          <label>文字水平偏移</label>
+          <div class="range-row"><input type="range" id="textOffsetX" min="-100" max="100" step="1" value="0"> <span class="val" id="textOffsetXVal">0</span></div>
+        </div>
+      </section>
+
+      <section class="panel-section" data-priority="4">
+        <h3>🎯 图标位置微调 <span class="toggle open">▶</span></h3>
+        <div class="content open">
+          <label>图标水平偏移</label>
+          <div class="range-row"><input type="range" id="iconOffsetX" min="-100" max="100" step="1" value="0"> <span class="val" id="iconOffsetXVal">0</span></div>
+          <label>图标垂直偏移</label>
+          <div class="range-row"><input type="range" id="iconOffsetY" min="-100" max="100" step="1" value="0"> <span class="val" id="iconOffsetYVal">0</span></div>
+        </div>
+      </section>
+
+      <section class="panel-section" data-priority="6">
+        <h3>🔷 图标形状 <span class="toggle open">▶</span></h3>
+        <div class="content open">
+          <div class="shape-grid" id="shapeGrid">
+            <div class="shape-item active" data-shape="none">—</div>
+            <div class="shape-item" data-shape="circle">●</div>
+            <div class="shape-item" data-shape="rounded">▢</div>
+            <div class="shape-item" data-shape="square">■</div>
+            <div class="shape-item" data-shape="hexagon">⬡</div>
+            <div class="shape-item" data-shape="diamond">◆</div>
+            <div class="shape-item" data-shape="shield">🛡</div>
+            <div class="shape-item" data-shape="star">★</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-section" data-priority="7">
+        <h3>🎯 图标内容 <span class="toggle open">▶</span></h3>
+        <div class="content open">
+          <label>🎨 IconPark 图标库（2600+ 图标）</label>
+          <input id="iconSearch" placeholder="🔍 搜索图标（如 home, star, user）">
+          <div class="iconfont-grid" id="iconfontGrid"></div>
+          <div class="hint">共 <span id="iconCount">0</span> 个图标 · 来自字节跳动 IconPark</div>
+          <label>😀 Emoji图标</label>
+          <div class="emoji-grid" id="emojiGrid"></div>
+          <label>✏️ 自定义文字（1-3字符）</label>
+          <input id="iconText" placeholder="A" maxlength="3">
+          <label>📤 上传自定义图标</label>
+          <input type="file" id="iconUpload" accept="image/*">
+          <div style="margin-top:10px;padding:8px;background:#1a1a2e;border-radius:6px;text-align:center;font-size:12px">当前：<span id="currentIconLabel" style="color:#e94560;font-weight:bold">A</span></div>
+        </div>
+      </section>
+
+      <section class="panel-section" data-priority="8">
+        <h3>🔤 文字样式 <span class="toggle open">▶</span></h3>
+        <div class="content open">
+          <label>主标题字号</label>
+          <div class="range-row"><input type="range" id="nameFontRatio" min="30" max="200" step="1" value="110"> <span class="val" id="nameFontRatioVal">110</span></div>
+          <label>副标题字号</label>
+          <div class="range-row"><input type="range" id="sloganFontRatio" min="20" max="150" step="1" value="55"> <span class="val" id="sloganFontRatioVal">55</span></div>
+          <label>字体粗细</label>
+          <select id="fontWeight">
+            <option value="300">细体</option>
+            <option value="normal">常规</option>
+            <option value="bold" selected>粗体</option>
+            <option value="900">超粗</option>
+          </select>
+          <label>字体</label>
+          <div class="font-select-wrapper">
+            <select id="fontFamily">
+              <optgroup label="系统字体">
+                <option value="&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif">默认无衬线</option>
+                <option value="&quot;Times New Roman&quot;, serif">Times New Roman</option>
+                <option value="&quot;Georgia&quot;, serif">Georgia</option>
+                <option value="&quot;Arial Black&quot;, Arial, sans-serif">Arial Black</option>
+                <option value="&quot;Impact&quot;, sans-serif">Impact</option>
+                <option value="&quot;Courier New&quot;, monospace">Courier New</option>
+              </optgroup>
+              <optgroup label="在线字体（选择后加载）">
+                <option value="&quot;Smiley Sans Oblique&quot;, sans-serif">得意黑</option>
+                <option value="&quot;LXGW WenKai&quot;, serif">霞鹜文楷</option>
+                <option value="&quot;MiSans&quot;, sans-serif">MiSans</option>
+                <option value="&quot;Alimama DongFang DaKai&quot;, serif">阿里妈妈东方大楷</option>
+                <option value="&quot;Source Han Sans SC VF&quot;, sans-serif">思源黑体</option>
+                <option value="&quot;Source Han Serif SC VF&quot;, serif">思源宋体</option>
+                <option value="&quot;Yozai&quot;, sans-serif">悠哉字体</option>
+                <option value="&quot;Slideyouran&quot;, sans-serif">演示悠然小楷</option>
+              </optgroup>
+            </select>
+            <span class="font-preview-badge" id="fontPreviewBadge">系统</span>
+          </div>
+          <div class="hint">💡 首次选择在线字体时会自动下载（按需加载）</div>
+          <label>主副标题间距</label>
+          <div class="range-row"><input type="range" id="textGap" min="-20" max="60" step="1" value="5"> <span class="val" id="textGapVal">5</span></div>
+          <label>副标题透明度</label>
+          <div class="range-row"><input type="range" id="sloganOpacity" min="20" max="100" step="1" value="70"> <span class="val" id="sloganOpacityVal">70%</span></div>
+        </div>
+      </section>
+
+      <section class="panel-section" data-priority="9">
+        <h3>💾 导出 <span class="toggle open">▶</span></h3>
+        <div class="content open">
+          <button class="btn-primary" id="downloadWithText">⬇ 下载完整Logo（带文字）</button>
+          <button class="btn-success" id="downloadIconOnly">🎯 仅下载图标（无文字）</button>
+          <button class="btn-secondary" id="downloadSizes">📦 多尺寸批量下载（带文字）</button>
+          <button class="btn-warning" id="downloadIconSizes">📦 图标多尺寸下载</button>
+          <button class="btn-secondary" id="downloadTransparent">🎯 透明背景PNG</button>
+          <button class="btn-reset" id="resetBtn">↺ 重置</button>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- 页面级别声明 -->
+<div class="page-disclaimer">
+  <strong>📢 声明：</strong> 本工具（免费Logo生成器）为免费在线服务，所有图标素材来源于 <a href="https://iconpark.oceanengine.com/" target="_blank" rel="noopener">IconPark</a>（字节跳动开源项目），字体来源于各开源字体项目。生成结果可免费用于商业用途，但请自行确认对应图标、字体的具体授权条款。本网站不对生成内容的版权做任何担保，亦不承担因使用本工具而产生的任何版权纠纷或法律责任。使用即表示您同意此声明。
+</div>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="/">首页</a>
+    <a href="about.html">关于我们</a>
+    <a href="privacy.html">隐私政策</a>
+    <a href="terms.html">使用条款</a>
+    <a href="contact.html">联系我们</a>
+  </div>
+  <div class="copyright">© 2026 <a href="/">免费在线Logo制作</a> · All Rights Reserved</div>
+  <div class="disclaimer">本工具的图标来自 IconPark（字节跳动开源项目），字体来自各开源项目，均遵循对应开源协议。<br>工具仅提供 Logo 制作功能，不对生成内容的最终版权归属做任何担保，请使用前自行查证。</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
